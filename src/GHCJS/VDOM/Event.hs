@@ -11,7 +11,7 @@ module GHCJS.VDOM.Event ( initEventDelegation
                         , stopPropagation
                         , stopImmediatePropagation
                         , preventDefault
-                          
+
                           -- * mouse
                         , MouseEvent
                         , click
@@ -28,7 +28,7 @@ module GHCJS.VDOM.Event ( initEventDelegation
                         , buttons
                         , clientX
                         , clientY
-                           
+
                           -- * keyboard
                         , KeyboardEvent
                         , keydown
@@ -39,7 +39,7 @@ module GHCJS.VDOM.Event ( initEventDelegation
                         , ctrlKey
                         , metaKey
                         , shiftKey
-                          
+
                           -- * drag
                         , DragEvent
                         , drag
@@ -48,7 +48,7 @@ module GHCJS.VDOM.Event ( initEventDelegation
                         , dragleave
                         , dragover
                         , dragstart
-                          
+
                           -- * focus
                         , FocusEvent
                         , focus
@@ -60,7 +60,7 @@ module GHCJS.VDOM.Event ( initEventDelegation
                         , scroll
                         , select
                         , unload
-                          
+
                           -- * wheel
                         , WheelEvent
                         , wheel
@@ -69,11 +69,12 @@ module GHCJS.VDOM.Event ( initEventDelegation
                         , deltaY
                         , deltaZ
                         , deltaMode
-                          
+
                           -- * generic
                         , Event
                         , submit
                         , change
+                        , value
                         ) where
 
 import Data.Coerce
@@ -196,3 +197,8 @@ clientX = er $ \e -> [jsu'| `e.clientX|0 |]
 clientY :: MouseEvent -> Int
 clientY = er $ \e -> [jsu'| `e.clientY|0 |]
 {-# INLINE clientY #-}
+
+-- or just Event -> JSString
+value :: Event_ a => a -> JSString
+value = er $ \e -> [jsu'| `e.target.value |]
+{-# INLINE value #-}
